@@ -1,0 +1,145 @@
+/* Container for products grid using CSS Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+
+/* Product card responsive styling */
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+}
+
+.product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0.25rem 0;
+  color: #333;
+  word-break: break-word;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  color: #e63946; /* or your accent color */
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.add-to-cart-btn, .view-all-btn {
+  background-color: #457b9d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover, .view-all-btn:hover {
+  background-color: #1d3557;
+}
+
+/* Responsive typography */
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Tabs container */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #457b9d;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #457b9d;
+  background: #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.tab.active,
+.tab:hover {
+  background: #457b9d;
+  color: white;
+}
+
+/* Media Queries for smaller devices */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .product-image {
+    max-height: 140px;
+  }
+
+  .add-to-cart-btn, .view-all-btn {
+    max-width: 100%;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .tabs {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  .product-card {
+    padding: 0.75rem;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+  }
+
+  .product-price {
+    font-size: 1rem;
+  }
+}

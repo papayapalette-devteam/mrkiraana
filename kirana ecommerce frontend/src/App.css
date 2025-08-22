@@ -1,0 +1,373 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #2d3e58;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  /* overflow: hidden; */
+  
+  
+}
+
+.sidebar {
+  /* width: 250px; */
+  /* height: 100vh; */
+  /* overflow-y: auto; */
+  /* background-color: #ebeff3; */
+  /* color: rgb(15, 9, 9); */
+  /* position: fixed; */
+  
+}
+
+.sidebar {
+  height: 100vh;
+  min-height: 100vh;
+  background: #ebeff3 !important;
+  color: #fff;
+  width: 270px;
+  box-shadow: 2px 0 16px 0 rgba(0,0,0,0.09);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.22s;
+}
+
+.sidebar .nav-link {
+  color: #0c0606;
+}
+
+.sidebar .nav-link:hover {
+  color: white;
+  background-color: #bbc2c9;
+}
+
+.logout-btn {
+  background-color: #007bff;
+  padding: 10px 0;
+  width: 120px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3; /* Hover blue */
+}
+
+
+
+.content {
+  margin-left: 250px;
+  height: 100vh;
+  overflow-y: auto;
+ background-color:#F1F5F9
+}
+
+
+
+
+.container {
+  display: flex;
+  width: 100%;
+   background-color:#f1f5f9
+
+ 
+}
+
+.left {
+  width: 70%;
+  padding: 10px;
+  background-color:#f1f5f9
+
+}
+
+.right {
+  width: 30%;
+  padding: 10px;
+    background-color:#f1f5f9
+}
+
+.box {
+  display: block;
+  background-color: #fff;
+  border: 0px solid #ccc;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+
+
+.remove-button {
+  margin-top: -150px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  border: 3px solid red; /* inner circle border */
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 28px;
+  padding: 0;
+  outline: 1px solid black; /* outer square border */
+  outline-offset: 3px; /* space between circle and square */
+  transition: outline-color 0.3s ease;
+}
+
+.remove-button:hover {
+  outline-color: red; /* outer border changes to red on hover */
+}
+.outer-border:hover {
+  border-color: red;
+}
+
+
+.input-light-border {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.09); /* very light border */
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-light-border:focus {
+  border-color: blue; /* border changes to blue on focus */
+ 
+}
+
+
+
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast.slide-in {
+  animation: slideInFromRight 0.5s ease forwards;
+}
+
+
+/* Slide Out to Left */
+/* Slide Out to Right */
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast.slide-out {
+  animation: slideOutToRight 0.5s ease forwards;
+}
+
+
+
+.sidebar-subitem {
+  opacity: 0.6;
+  font-size: 15px;
+  margin-top: -10px;
+  display: block;
+}
+
+
+
+
+
+
+
+.custom-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 130px;
+  height: 36px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+
+
+.hover-blue-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width:100px;
+  height:40px;
+}
+
+.hover-blue-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 150px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+
+
+
+
+.add-brand-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.add-brand-btn:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+.btn-blue {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-blue:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+.my-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.my-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}
+
+
+
+
+
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* above other content */
+}
+
+.success-message {
+  background-color: #e2e7e3; /* bootstrap success green */
+  color: rgb(40, 141, 48);
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-size: 23px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

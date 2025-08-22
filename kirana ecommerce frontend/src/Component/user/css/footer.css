@@ -1,0 +1,139 @@
+/* Footer.css (import this in your Footer.jsx, or use inline style tags) */
+.footer {
+  background: #fff;
+  color: #232323;
+  padding: 2rem 1.5rem 1rem 1.5rem;
+  border-top: 1px solid #ececec;
+  font-size: 1rem;
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 160px;
+  min-width: 150px;
+  margin-bottom: 1.5rem;
+}
+
+.brand {
+  min-width: 220px;
+  max-width: 240px;
+}
+
+.logo {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+.logo-icon {
+  font-size: 2rem;
+}
+
+.social a {
+  margin-right: 0.7rem;
+  color: #232323;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.footer-section h3 {
+  margin-bottom: 0.7rem;
+  font-size: 1.025rem;
+  font-weight: 600;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #5a5a5a;
+}
+.footer-section ul li {
+  margin-bottom: 0.55rem;
+  cursor: pointer;
+}
+
+.talk .footer-link {
+  color: #d1517a;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.97em;
+}
+
+.footer-contact {
+  margin-top: 0.5rem;
+}
+.footer-contact .phone, .footer-contact .email {
+  font-size: 0.98rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.93rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-link {
+  color: #f15c91;
+}
+
+.payments img {
+  width: 244px;
+  margin-left: 15.5rem;
+  vertical-align: middle;
+}
+
+.backtotop {
+  background: #17172d;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1em;
+  margin-left: 1.2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  .footer-main {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .footer-section {
+    flex-basis: 44%;
+  }
+}
+@media (max-width: 660px) {
+  .footer-main {
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-section {
+    min-width: unset;
+    max-width: unset;
+    margin-bottom: 1.2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}

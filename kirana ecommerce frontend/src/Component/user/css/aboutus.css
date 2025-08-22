@@ -1,0 +1,89 @@
+/* General container */
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Titles */
+.about-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.section-title {
+  font-size: 1.6em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+/* Paragraphs */
+.about-text {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Why Choose list */
+.why-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.why-list li {
+  margin-bottom: 8px;
+}
+
+/* Store Card */
+.store-card {
+  background: #f8f8f8;
+  padding: 15px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.store-title {
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.store-address, .store-timings, .store-contact {
+  margin-bottom: 8px;
+}
+
+.store-contact a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.store-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 1.6em;
+  }
+  .section-title {
+    font-size: 1.4em;
+  }
+  .store-card {
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.4em;
+  }
+  .section-title {
+    font-size: 1.2em;
+  }
+}
