@@ -1,6 +1,6 @@
 import axios from "axios";
 const instance=axios.create({
-          baseURL:'https://api.mrkiraana.com/'
+          baseURL:'https://mrkiraana-1.onrender.com/'
         // baseURL:'http://localhost:5000/'
 
 
