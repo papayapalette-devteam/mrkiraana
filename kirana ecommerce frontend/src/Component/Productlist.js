@@ -118,8 +118,8 @@ function Productlist() {
       // Map Excel rows to your product schema data
       const productsToUpload = jsonData.map(item => ({
         title: item.Title,
-        description:item.description,
-        sku: item.sku,
+        description:item.Description,
+        sku: item.Sku,
         quantity: Number(item.Quantity) || 0,
         unit: item.Unit || "",
         price: Number(item.Price) || 0,

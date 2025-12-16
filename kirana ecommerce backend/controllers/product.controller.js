@@ -133,6 +133,7 @@ const deleteProduct = async (req, res) => {
 const bulkupload= async (req, res) => {
   try {
     const { products } = req.body;
+    
 
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ message: "No products provided" });
