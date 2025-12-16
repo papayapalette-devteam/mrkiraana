@@ -113,7 +113,7 @@ const product = location.state?.product; // Safely access passed product
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
 
-  console.log(product);
+
 
   const handleTagKeyDown = (e) => {
     if (e.key === "Enter" && tagInput.trim()) {

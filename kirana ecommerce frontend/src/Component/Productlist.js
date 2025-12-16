@@ -21,18 +21,28 @@ function Productlist() {
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+
+
+const [page, setPage] = useState(1);
+const [limit] = useState(10);
+const [totalPages, setTotalPages] = useState(1);
+
 
   const fetchProducts = async () => {
     try {
-      const response = await api.get("api/product/getproduct");
-      setProducts(response.data);
+      const response = await api.get(
+      `api/product/getproduct?page=${page}&limit=${limit}`
+    );
+      setProducts(response.data.data);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
+
+    useEffect(() => {
+    fetchProducts();
+  }, [page,limit]);
 
   const promptDelete = (product) => {
     setProductToDelete(product);
@@ -103,6 +113,8 @@ function Productlist() {
   };
 
   // ================= Import from Excel =================
+  const[loading,setloading]=useState(false)
+
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -137,6 +149,7 @@ function Productlist() {
       }));
 
       try {
+        setloading(true)
         const response = await api.post("api/product/bulkupload", { products: productsToUpload });
 
         if (response.status === 200) {
@@ -157,6 +170,10 @@ function Productlist() {
       } catch (error) {
         console.error("Import error:", error);
         alert("Error importing products.");
+      }
+      finally
+      {
+        setloading(false)
       }
     };
     reader.readAsArrayBuffer(file);
@@ -223,13 +240,28 @@ function Productlist() {
               style={{ display: "none" }}
               id="upload-excel"
             />
-          <label
-            htmlFor="upload-excel"
-            className="btn btn-primary me-2 d-inline-flex align-items-center justify-content-center"
-            style={{ cursor: "pointer", }}
-          >
-            <i className="fas fa-file-import me-2"></i>Import from Excel
-          </label>
+         <label
+  htmlFor="upload-excel"
+  className="btn btn-primary me-2 d-inline-flex align-items-center justify-content-center"
+  style={{ cursor: loading ? "not-allowed" : "pointer" }}
+>
+  {loading ? (
+    <>
+      <span
+        className="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Importing...
+    </>
+  ) : (
+    <>
+      <i className="fas fa-file-import me-2"></i>
+      Import from Excel
+    </>
+  )}
+</label>
+
           </div>
           </div>
 
@@ -241,79 +273,137 @@ function Productlist() {
               marginTop: "20px",
             }}
           >
-            <table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
-                backgroundColor: "white",
-              }}
+           <table
+  style={{
+    width: "100%",
+    borderCollapse: "collapse",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    overflow: "hidden",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+  }}
+>
+  <thead>
+    <tr style={{ backgroundColor: "#f5f7fa" }}>
+      {["S. No", "Product", "SKU", "QTY", "Unit", "Price", "Action"].map(
+        (header) => (
+          <th
+            key={header}
+            style={{
+              padding: "12px 10px",
+              textAlign: "left",
+              fontSize: "14px",
+              fontWeight: "600",
+              color: "#555",
+              borderBottom: "1px solid #e5e7eb",
+            }}
+          >
+            {header}
+          </th>
+        )
+      )}
+    </tr>
+  </thead>
+
+  <tbody>
+    {products.length === 0 ? (
+      <tr>
+        <td
+          colSpan="7"
+          style={{
+            padding: "14px",
+            fontSize: "13px",
+            textAlign: "center",
+            color: "#888",
+          }}
+        >
+          No products available.
+        </td>
+      </tr>
+    ) : (
+      products.map((product, index) => (
+        <tr
+          key={product._id || index}
+          style={{
+            borderBottom: "1px solid #f0f0f0",
+            transition: "background 0.2s",
+          }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "#f9fafb")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "transparent")
+          }
+        >
+          {/* S. No */}
+          <td style={{ padding: "10px", fontSize: "13px", color: "#555" }}>
+            {index + 1}
+          </td>
+
+          <td style={{ padding: "10px", fontSize: "13px" }}>
+            {product.title}
+          </td>
+          <td style={{ padding: "10px", fontSize: "13px" }}>
+            {product.sku}
+          </td>
+          <td style={{ padding: "10px", fontSize: "13px" }}>
+            {product.quantity}
+          </td>
+          <td style={{ padding: "10px", fontSize: "13px" }}>
+            {product.unit}
+          </td>
+          <td style={{ padding: "10px", fontSize: "13px", fontWeight: "600" }}>
+            ₹{product.price}
+          </td>
+
+          {/* Actions */}
+          <td style={{ padding: "10px", fontSize: "13px" }}>
+            <button
+              className="btn btn-sm btn-outline-primary"
+              onClick={() => navigate("/EditProduct", { state: { product } })}
             >
-              <thead>
-                <tr>
-                  {["Product", "SKU", "QTY", "Unit", "Price", "Action"].map((header) => (
-                    <th
-                      key={header}
-                      style={{
-                        opacity: 0.2,
-                        padding: "8px",
-                        textAlign: "left",
-                        borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-                        fontSize: "15px",
-                      }}
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
+              Edit
+            </button>
 
-              <tbody>
-                {products.length === 0 ? (
-                  <tr>
-                    <td colSpan="6" style={{ padding: "8px", fontSize: "13px" }}>
-                      No products available.
-                    </td>
-                  </tr>
-                ) : (
-                  products.map((product, index) => (
-                    <tr key={index}>
-                      <td style={{ padding: "8px", fontSize: "13px" }}>{product.title}</td>
-                      <td style={{ padding: "8px", fontSize: "13px" }}>{product.sku}</td>
-                      <td style={{ padding: "8px", fontSize: "13px" }}>{product.quantity}</td>
-                      <td style={{ padding: "8px", fontSize: "13px" }}>{product.unit}</td>
-                      <td style={{ padding: "8px", fontSize: "13px" }}>₹{product.price}</td>
-                      {/* <td style={{ padding: "8px", fontSize: "13px" }}>
-                        {product.quantity > 0 ? "Active" : "Inactive"}
-                      </td> */}
-                      <td style={{ padding: "8px", fontSize: "13px" }}>
-                        <button
-                          className="btn btn-sm btn-primary"
-                          onClick={() => navigate("/EditProduct", { state: { product } })}
-                        >
-                          Edit
-                        </button>
+            <button
+              className="btn btn-sm btn-outline-danger ms-2"
+              onClick={() => promptDelete(product)}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))
+    )}
+  </tbody>
+</table>
 
-                        <button
-                          className="btn btn-sm"
-                          onClick={() => promptDelete(product)}
-                          style={{
-                            marginLeft: "3px",
-                            background: "red",
-                            border: "none",
-                            color: "white",
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
           </div>
         </div>
+        <div className="d-flex gap-2 mt-3">
+  <button
+    className="btn btn-sm btn-secondary"
+    disabled={page === 1}
+    onClick={() => setPage(page - 1)}
+  >
+    Previous
+  </button>
+
+  <span className="align-self-center">
+    Page {page} of {totalPages}
+  </span>
+
+  <button
+    className="btn btn-sm btn-secondary"
+    disabled={page === totalPages}
+    onClick={() => setPage(page + 1)}
+  >
+    Next
+  </button>
+</div>
+
       </div>
+      
 
       {/* Full-Screen Confirmation Modal */}
       {showConfirmModal && (

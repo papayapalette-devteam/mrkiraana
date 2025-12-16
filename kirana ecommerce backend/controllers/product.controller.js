@@ -1,3 +1,4 @@
+const { log } = require('console');
 const ProductModel = require('../models/product.model');
 const cloudinary = require('cloudinary').v2;
 const fs=require('fs')
@@ -63,11 +64,27 @@ const addProduct = async (req, res) => {
 // ✅ Get all products
 const getAllProducts = async (req, res) => {
   try {
-    const products = await ProductModel.find();
-    res.json(products);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const totalCount = await ProductModel.countDocuments();
+
+    const products = await ProductModel.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
+    res.json({
+      data: products,
+      currentPage: page,
+      totalPages: Math.ceil(totalCount / limit),
+      totalCount,
+    });
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error fetching products:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -82,6 +99,56 @@ const getProductById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+const getAllCategories = async (req, res) => {
+  try {
+    const categories = await ProductModel.aggregate([
+      {
+        $group: {
+          _id: "$categories",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          categories: "$_id",
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          categories: { $push: "$categories" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          categories: 1,
+        },
+      },
+    ]);
+
+    res.json(categories[0]?.categories || []);
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const getProductsByCategory = async (req, res) => {
+  try {
+    const { categories } = req.params;
+   
+    const products = await ProductModel.find({ categories });
+
+    res.json({
+      data: products,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 
 // ✅ Update a product
 const updateProduct = async (req, res) => {
@@ -189,5 +256,7 @@ module.exports = {
   getProductById,
   updateProduct,
   deleteProduct,
-  bulkupload
+  bulkupload,
+  getAllCategories,
+  getProductsByCategory
 };

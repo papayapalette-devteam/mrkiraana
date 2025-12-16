@@ -21,7 +21,7 @@ function Sidebar() {
  
       <div
         className="sidebar d-flex flex-column p-3"
-        style={{ width: "270px", backgroundColor: "black" }}
+        style={{ width: "270px", backgroundColor: "black",overflow:"scroll" }}
       >
         <img
           src={logo1}

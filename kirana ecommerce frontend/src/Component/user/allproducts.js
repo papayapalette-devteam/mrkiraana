@@ -25,8 +25,8 @@ function CategoryProductsList() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await api.get("api/product/getproduct");
-      const products = response.data || [];
+      const response = await api.get(`api/product/get-categories-products/${decodedCategory}`);
+      const products = response.data.data || [];
       setAllProducts(products);
 
         const filtered = products.filter(p => p.categories===decodedCategory);
